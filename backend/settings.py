@@ -163,7 +163,6 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_REGION_NAME = os.environ.get("AWS_HOST_REGION")
 AWS_DEFAULT_ACL = None
 AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
-print(AWS_S3_CUSTOM_DOMAIN, 1)
 AWS_S3_OBJECT_PARAMETERS = {
     "CacheControl": "max-age=86400",
 }
@@ -173,7 +172,6 @@ AWS_S3_OBJECT_PARAMETERS = {
 STATIC_LOCATION = "static"
 STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-# if os.environ.get("DEBUG_VALUE") == "True":
 STATICFILES_STORAGE = "backend.storage_backends.StaticStorage"
 
 # S3 Media settings
