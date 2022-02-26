@@ -171,9 +171,9 @@ AWS_S3_OBJECT_PARAMETERS = {
 # S3 Static settings
 STATIC_LOCATION = "static"
 STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/"
-STATIC_ROOT = str(BASE_DIR.joinpath("static"))
-if os.environ.get("DEBUG_VALUE") == "True":
-    STATICFILES_STORAGE = "backend.storage_backends.StaticStorage"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# if os.environ.get("DEBUG_VALUE") == "True":
+STATICFILES_STORAGE = "backend.storage_backends.StaticStorage"
 
 # S3 Media settings
 PUBLIC_MEDIA_LOCATION = "media"
@@ -252,7 +252,7 @@ REST_FRIENDSHIP = {
 }
 
 if os.environ.get("DEBUG_VALUE") != "True":
-    django_heroku.settings(locals())
+    django_heroku.settings(locals(), staticfiles=False)
 
     CHANNEL_LAYERS = {
         "default": {
