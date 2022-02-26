@@ -171,7 +171,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 # S3 Static settings
 STATIC_LOCATION = "static"
 STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # if os.environ.get("DEBUG_VALUE") == "True":
 STATICFILES_STORAGE = "backend.storage_backends.StaticStorage"
 
