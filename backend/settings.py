@@ -69,11 +69,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "https://packetsss.live",
 ]
-# CORS_ORIGIN_WHITELIST = [
-#     "http://localhost:3000",
-#     "http://localhost:8000",
-#     "https://packetsss.live",
-# ]
 
 CORS_ALLOW_HEADERS = (
     "content-disposition",
@@ -171,6 +166,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 STATIC_LOCATION = "static"
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, "backend/static")]
 STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/"
+STATIC_ROOT = str(BASE_DIR.joinpath("static"))
 # STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 STATICFILES_STORAGE = "backend.storage_backends.StaticStorage"
 
