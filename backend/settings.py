@@ -1,4 +1,5 @@
 import os
+import boto3
 import django_heroku
 from pathlib import Path
 from dotenv import load_dotenv
@@ -57,6 +58,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_ALL_ORIGINS = (
     True  # If this is True then `CORS_ALLOWED_ORIGINS` will not have any effect
@@ -151,10 +154,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 # AWS
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_S3_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_S3_SECRET_ACCESS_KEY")
+
+AWS_S3_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID = os.environ.get("AWS_S3_ACCESS_KEY_ID")
+AWS_S3_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY = os.environ.get(
+    "AWS_S3_SECRET_ACCESS_KEY"
+)
 AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
-# AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_S3_REGION_NAME = os.environ.get("AWS_HOST_REGION")
 AWS_DEFAULT_ACL = None
 AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
@@ -162,13 +167,13 @@ AWS_S3_OBJECT_PARAMETERS = {
     "CacheControl": "max-age=86400",
 }
 
+
 # S3 Static settings
 STATIC_LOCATION = "static"
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, "backend/static")]
 STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/"
 STATIC_ROOT = str(BASE_DIR.joinpath("static"))
-# STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-STATICFILES_STORAGE = "backend.storage_backends.StaticStorage"
+if os.environ.get("DEBUG_VALUE") == "True":
+    STATICFILES_STORAGE = "backend.storage_backends.StaticStorage"
 
 # S3 Media settings
 PUBLIC_MEDIA_LOCATION = "media"
