@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "csp.middleware.CSPMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -59,8 +60,11 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-# If this is True then `CORS_ALLOWED_ORIGINS` will not have any effect
+
+
 CORS_ALLOW_ALL_ORIGINS = False
+# If this is True then `CORS_ALLOWED_ORIGINS` will not have any effect
+
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
@@ -264,3 +268,9 @@ if os.environ.get("DEBUG_VALUE") != "True":
             "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
         }
     }
+
+
+### SECURITY ###
+
+# set CSP policy to load only from server
+CSP_DEFAULT_SRC = ("'unsafe-inline'", AWS_S3_CUSTOM_DOMAIN)
