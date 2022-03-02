@@ -274,3 +274,8 @@ if os.environ.get("DEBUG_VALUE") != "True":
 
 # set CSP policy to load only from server
 CSP_DEFAULT_SRC = ("'unsafe-inline'", AWS_S3_CUSTOM_DOMAIN)
+
+# HSTS
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_INCLUDE_PRELOAD = True
