@@ -61,7 +61,6 @@ MIDDLEWARE = [
 ]
 
 
-
 CORS_ALLOW_ALL_ORIGINS = False
 # If this is True then `CORS_ALLOWED_ORIGINS` will not have any effect
 
@@ -273,9 +272,18 @@ if os.environ.get("DEBUG_VALUE") != "True":
 ### SECURITY ###
 
 # set CSP policy to load only from server
-CSP_DEFAULT_SRC = ("'unsafe-inline'", AWS_S3_CUSTOM_DOMAIN)
+CSP_DEFAULT_SRC = ("'self'", AWS_S3_CUSTOM_DOMAIN)
+CSP_SCRIPT_SRC_ELEM = (
+    "'sha256-K2w4m0VrJ+Njhv782hiCwTin5ttpnXcFkRWtCuqj5wQ='",
+    "'sha256-CctFeC4zU3ZdlruNMfaRsmhQV9n/V1LLezx4A6pAvRs='",
+    AWS_S3_CUSTOM_DOMAIN,
+)
 
 # HSTS
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_INCLUDE_PRELOAD = True
+
+# redirect HTTP to HTTPS
+if os.environ.get("DEBUG_VALUE") != "True":
+    SECURE_SSL_REDIRECT = True
