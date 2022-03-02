@@ -59,17 +59,13 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
-
-CORS_ALLOW_ALL_ORIGINS = (
-    True  # If this is True then `CORS_ALLOWED_ORIGINS` will not have any effect
-)
+# If this is True then `CORS_ALLOWED_ORIGINS` will not have any effect
+CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://google.com",
-    "http://127.0.0.1:8000",
-    "http://localhost:8000",
+    "http://localhost:3000",
     "https://packetsss.live",
 ]
 
@@ -171,7 +167,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 # S3 Static settings
 STATIC_LOCATION = "static"
 STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/"
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_STORAGE = "backend.storage_backends.StaticStorage"
 
 # S3 Media settings
